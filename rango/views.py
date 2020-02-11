@@ -136,8 +136,8 @@ def user_login(request):
     if request.method == 'POST':
         # Use request.post.get since it will return None if the value does not exist
         # unlike 'request.post', which raises an error
-        username = request.post.get('username')
-        password = request.post.get('password')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
         # check the provided username and password exist
         # a user object is returned if one does
@@ -154,4 +154,4 @@ def user_login(request):
             print(f"Invalid login details: {username}, {password}")
             return HttpResponse('Invalid login details supplied.')
     else:
-        return render(request, 'login.html')
+        return render(request, 'rango/login.html')
