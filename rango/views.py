@@ -99,6 +99,7 @@ def add_page(request, category_name_slug):
     context_dict = {'form': form, 'category': category}
     return render(request, 'rango/add_page.html', context=context_dict)
 
+
 def register(request):
     registered = False
 
@@ -126,6 +127,30 @@ def register(request):
     else:
         user_form = UserForm()
         profile_form = UserProfileForm()
-    return render(request, 'rango/register.html', context={'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
+    return render(request, 'rango/register.html',
+                  context={'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 
 
+def user_login(request):
+    if request.method == 'POST':
+        # Use request.post.get since it will return None if the value does not exist
+        # unlike 'request.post', which raises an error
+        username = request.post.get('username')
+        password = request.post.get('password')
+
+        # check the provided username and password exist
+        # a user object is returned if one does
+
+        user = authenticate(username=username, password=password)
+
+        if user:
+            if user.is_active:
+                login(request, user)
+                return redirect(reverse('rango:index'))
+            else:
+                return HttpResponse('Your Rango Account is disabled.')
+        else:
+            print(f"Invalid login details: {username}, {password}")
+            return HttpResponse('Invalid login details supplied.')
+    else:
+        return render(request, 'login.html')
