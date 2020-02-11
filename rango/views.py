@@ -5,6 +5,7 @@ from rango.forms import CategoryForm
 from django.shortcuts import redirect
 from rango.forms import PageForm, UserForm, UserProfileForm
 from django.urls import reverse
+from django.contrib.auth import authenticate, login
 
 
 def index(request):
