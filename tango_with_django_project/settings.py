@@ -17,8 +17,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 MEDIA_DIR = os.path.join(BASE_DIR, 'media')
-LOGIN_URL = 'rango:login'
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -31,17 +29,23 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Registration
+REGISTRATION_OPEN = True
+REGISTRATION_AUTO_LOGIN = True
+LOGIN_REDIRECT_URL = 'rango:index'
+LOGIN_URL = 'auth_login'
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rango',
+    'registration',
+    'django.contrib.admin',
 ]
 
 MIDDLEWARE = [
@@ -118,6 +122,20 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+# Registration
+
+
+# If true, users can register.
+
+# If true, the user will be automatically logged in after registering.
+
+
+# The URL that Django redirects users to after logging in
+
+
+# The page users are directed to if they are not logged in.
+
 
 
 # Static files (CSS, JavaScript, Images)
